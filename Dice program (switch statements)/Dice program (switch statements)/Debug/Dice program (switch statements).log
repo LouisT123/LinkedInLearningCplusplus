@@ -1,0 +1,3 @@
+﻿  Dice program (switch statements).cpp
+C:\Users\L3g8n\Desktop\Programs\Learning C++ linked in learning\Dice program (switch statements)\Dice program (switch statements)\Dice program (switch statements).cpp(15,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Dice program (switch statements).vcxproj -> C:\Users\L3g8n\Desktop\Programs\Learning C++ linked in learning\Dice program (switch statements)\Debug\Dice program (switch statements).exe

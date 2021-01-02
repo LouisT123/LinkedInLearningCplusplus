@@ -1,0 +1,6 @@
+﻿  random number generator exercise.cpp
+C:\Users\L3g8n\Desktop\Programs\Learning C++ linked in learning\random number generator exercise\random number generator exercise\random number generator exercise.cpp(27,26): warning C4305: 'initializing': truncation from 'double' to 'float'
+C:\Users\L3g8n\Desktop\Programs\Learning C++ linked in learning\random number generator exercise\random number generator exercise\random number generator exercise.cpp(29,26): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\L3g8n\Desktop\Programs\Learning C++ linked in learning\random number generator exercise\random number generator exercise\random number generator exercise.cpp(32,28): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\L3g8n\Desktop\Programs\Learning C++ linked in learning\random number generator exercise\random number generator exercise\random number generator exercise.cpp(47,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  random number generator exercise.vcxproj -> C:\Users\L3g8n\Desktop\Programs\Learning C++ linked in learning\random number generator exercise\Debug\random number generator exercise.exe

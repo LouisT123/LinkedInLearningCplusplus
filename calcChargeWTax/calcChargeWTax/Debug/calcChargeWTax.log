@@ -1,0 +1,3 @@
+﻿  calcChargeWTax.cpp
+C:\Users\L3g8n\Desktop\Programs\Learning C++ linked in learning\calcChargeWTax\calcChargeWTax\calcChargeWTax.cpp(7,27): warning C4305: 'initializing': truncation from 'double' to 'float'
+  calcChargeWTax.vcxproj -> C:\Users\L3g8n\Desktop\Programs\Learning C++ linked in learning\calcChargeWTax\Debug\calcChargeWTax.exe
