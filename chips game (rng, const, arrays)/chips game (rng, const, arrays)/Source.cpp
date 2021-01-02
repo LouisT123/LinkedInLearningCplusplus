@@ -1,10 +1,13 @@
 #include <iostream>
-
 #include <cstdlib>
 #include <ctime>
-
-
 using namespace std;
+
+
+string FindPlayerName(string names[], bool playerTurn);
+
+int askMove(bool player1Turn, int chipsInPile, string names[]);
+void getUserNames(string players[]);
 
 const int MAX_CHIPS = 100; //maximum number of chips that can be generated randomly
 const float MAX_TURN = .5; //chip division factor
@@ -21,16 +24,15 @@ int main()
 
 	//array to store player names
 	string playerName[2];
-	cout << "player 1, please enter your name: " << endl;
-	cin >> playerName[0];
-	cout << "player 2, please enter your name: " << endl;
-	cin >> playerName[1];
+	
+	//get player names
+	getUserNames(playerName);
 
-	//seed the genrator
+	//seed the generator
 	srand(time(0));
 
 
-	do { //replay
+	do { //replay the game
 
 
 		//start game with a random number of chips in pile
@@ -40,45 +42,25 @@ int main()
 		gameOver = false; //sets to false
 		while (gameOver == false) //check to see if its false
 		{
-			//taken invalid number of chips
-
-			do
-			{
-				if (player1Turn)
-				{
-					cout << playerName[0] << ", How many chips would you like?" << endl;
-				}
-				else
-				{
-					cout << playerName[1] << ", How many chips would you like?" << endl;
-				}
-				cout << "You can only take up to ";
-				if (static_cast<int>(MAX_TURN * chipsInPile) == 0) //if 1 chip left
-				{
-					cout << "1" << endl; //display
-				}
-				else
-				{
-					cout << static_cast<int>(MAX_TURN * chipsInPile) << endl; //otherwise show actual number left after division
-				}
-				cin >> chipsTaken;
-			} while (chipsTaken > (static_cast<int>(MAX_TURN * chipsInPile)) && (chipsInPile > 1)); //cannot take more than possible number of chips
-
+			//asks player to take chips and checks to see if taken invalid number of chips
+			chipsTaken = askMove(player1Turn, chipsInPile, playerName);
+			
 			//perform action of removing chips
 			chipsInPile -= chipsTaken;
 			cout << "there are " << chipsInPile << " left in the pile" << endl;
 
+			//game end conditions
 			if (chipsInPile == 0)
 			{
-				gameOver = true; //end game
-				if (player1Turn)
-				{
-					cout << playerName[1] << ", congrats you won!" << endl;
-				}
+				gameOver = true; 
+				/*if (player1Turn) //converted to function
+				{*/
+				cout << FindPlayerName(playerName, player1Turn) << ", congrats you won!" << endl;
+				/*}
 				else
 				{
 					cout << playerName[0] << ", congrats you won!" << endl;
-				}
+				}*/
 			}
 			else
 			{
@@ -88,15 +70,82 @@ int main()
 		}
 		cout << "do you want to play again? (Y/N) " << endl;
 		cin >> replay;
-
-	} while ((replay == 'y') || (replay == 'Y')); //replay
+		replay = toupper(replay);
+	} while (replay == 'Y');
+	//} while ((replay == 'y') || (replay == 'Y')); //old replay 
 
 }
 
+string FindPlayerName(string names[], bool playerTurn)
+{
+	if (playerTurn == true)
+	{
+		return names[0];
+	}
+	else
+	{
+		return names[1];
+	}
 
-	////random number of chips taken
-	//chipsTaken = (rand() % halfChips) + 1;
+}
 
-	//cout << "random chips taken: " << chipsTaken << endl;
+void getUserNames(string playerName[])
+{
+	cout << "player 1, please enter your name: " << endl;
+	cin >> playerName[0];
+	cout << "player 2, please enter your name: " << endl;
+	cout << "if you wish to play against the computer, enter CPU" << endl;
+	cin >> playerName[1];
+}
+
+int askMove(bool player1Turn, int chipsInPile, string playerName[])
+{
+	int chipsTaken;
+	int maxTurn = (MAX_TURN * chipsInPile);
+	do
+	{
+		/*if (player1Turn) //replaced with function FindPlayerName
+		{*/
+		cout << FindPlayerName(playerName, player1Turn) << ", How many chips would you like?" << endl;
+		/*}
+		else
+		{
+			cout << playerName[1] << ", How many chips would you like?" << endl;
+		}*/
+		cout << "You can only take up to ";
+		if (maxTurn == 0) //if 1 chip left
+		{
+			cout << "1" << endl; //display
+		}
+		else
+		{
+			cout << maxTurn << endl; //otherwise show actual number left after division
+		}
+		if ((FindPlayerName(playerName, player1Turn) == "CPU") || ((FindPlayerName(playerName, player1Turn) == "cpu")))
+		{
+			if (maxTurn == 0)
+			{
+				chipsTaken = 1;
+			}
+			else
+			{
+				chipsTaken = (rand() % (maxTurn) + 1); //random number of chips taken (player versus computer)
+				cout << "cpu has taken: " << chipsTaken << endl;
+			}
+		}
+		else
+		{
+			cin >> chipsTaken;
+		}
+		
+	} while ((chipsTaken > maxTurn) && (chipsInPile > 1)); //cannot take more than possible number of chips
+
+	return chipsTaken;
+}
+
+
+	
+
+
 
 
