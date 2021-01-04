@@ -1,13 +1,16 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <fstream>
 using namespace std;
 
 
 string FindPlayerName(string names[], bool playerTurn);
 
+
 int askMove(bool player1Turn, int chipsInPile, string names[]);
 void getUserNames(string players[]);
+
 
 const int MAX_CHIPS = 100; //maximum number of chips that can be generated randomly
 const float MAX_TURN = .5; //chip division factor
@@ -20,6 +23,8 @@ int main()
 	int chipsInPile = 0;
 	int chipsTaken = 0;
 
+	int moves = 0;
+
 	char replay;
 
 	//array to store player names
@@ -27,6 +32,10 @@ int main()
 	
 	//get player names
 	getUserNames(playerName);
+
+	//output file variables
+	ofstream outFile;
+	outFile.open("Winners.txt", ios::app);
 
 	//seed the generator
 	srand(time(0));
@@ -40,6 +49,8 @@ int main()
 		cout << "this round will start with " << chipsInPile << " chips in the pile" << endl;
 
 		gameOver = false; //sets to false
+
+		moves = 0;
 		while (gameOver == false) //check to see if its false
 		{
 			//asks player to take chips and checks to see if taken invalid number of chips
@@ -48,7 +59,7 @@ int main()
 			//perform action of removing chips
 			chipsInPile -= chipsTaken;
 			cout << "there are " << chipsInPile << " left in the pile" << endl;
-
+			moves++;
 			//game end conditions
 			if (chipsInPile == 0)
 			{
@@ -61,6 +72,7 @@ int main()
 				{
 					cout << playerName[0] << ", congrats you won!" << endl;
 				}*/
+				outFile << FindPlayerName(playerName, player1Turn) << " won in " << moves << "moves";
 			}
 			else
 			{

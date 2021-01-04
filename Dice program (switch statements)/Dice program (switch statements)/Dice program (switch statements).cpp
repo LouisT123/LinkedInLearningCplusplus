@@ -14,7 +14,7 @@ int main()
     //seed the random number generator
     srand(time(0));
 
-    //dice = 7; this line will show invalid
+    //dice = 7; nah just this line will show invalid
     dice = (rand() % 6) + 1;
     cout << "You rolled a " << dice << endl;
 
